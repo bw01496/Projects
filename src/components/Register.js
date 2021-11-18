@@ -11,8 +11,6 @@ const Register = ({ setToken, setUsers }) => {
 
   return (
     <>
-      {/* Make it so my password and confirm password have to be equal in order for them to register.  */}
-
       <h1>Register</h1>
 
       <form
@@ -41,24 +39,6 @@ const Register = ({ setToken, setUsers }) => {
               navigate("/profile");
             }
           }
-          // const response = await fetch(`${APIURL}/users/register`, {
-          //     method: "POST",
-          //     headers: {
-          //         'Content-Type': 'application/json',
-
-          //     },
-          //     body: JSON.stringify({
-          //         user:{
-          //             username,
-          //             password
-          //         }
-          //     })
-          // })
-          // .catch(console.error);
-          // const responseObj = await response.json();
-          // console.log(responseObj)
-          // setToken(responseObj.data.token)
-          // console.log(setToken)
         }}
       >
         <input
