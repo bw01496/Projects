@@ -11,7 +11,7 @@ import Login from "./components/Login";
 import Posts from "./components/Posts";
 import Register from "./components/Register";
 import CreatePost from "./components/CreatePost";
-// import EditPost from "./components/EditPost";
+
 import Profile from "./components/Profile";
 import Messages from "./components/Messages";
 
@@ -22,7 +22,7 @@ const App = ({}) => {
   const [token, setToken] = useState("");
   const [posts, setPosts] = useState([]);
   const [user, setUsers] = useState("");
-  // const [postId, setPostId] = useState([]);
+
   const [userId, setUserId] = useState("");
   const [profile, setProfile] = useState({});
   console.log(userId);
@@ -33,8 +33,6 @@ const App = ({}) => {
     const respObj = await response.json();
     const posts = respObj.data.posts;
     if (posts) setPosts(posts);
-    // console.log(respObj)
-    // setPosts(respObj.data.posts)
   };
   useEffect(() => {
     try {
@@ -62,7 +60,6 @@ const App = ({}) => {
         <button
           className={token ? "" : "isLoggedIn"}
           onClick={() => {
-            // change use state?
             navigate("/account/login");
           }}
         >
@@ -81,26 +78,17 @@ const App = ({}) => {
           path="/account/register"
           element={<Register setToken={setToken} setUsers={setUsers} />}
         />
-        {/* In final version setToken shouldn't be in register, and be able to disable routes possibly if they aren't signed in...or not logged in */}
-        {/* <Route path= "/account/:method" element={<Login setToken={setToken} setUser={setUser}/>}/>  */}
+
         <Route
           path="/posts"
           element={
             <>
               <CreatePost setPosts={setPosts} token={token} />{" "}
-              {/* <EditPost
-                setPosts={setPosts}
-                token={token}
-                postId={postId}
-                setPostId={setPostId}
-              />{" "} */}
               <Posts posts={posts} token={token} fetchPosts={fetchPosts} />
             </>
           }
         />
-        {/* <Route exact path="/posts/:postId">
-          <MessageView posts={posts} />
-        </Route> */}
+
         <Route
           path="/profile"
           element={
@@ -109,6 +97,7 @@ const App = ({}) => {
               setUserId={setUserId}
               profile={profile}
               setProfile={setProfile}
+              token={token}
             />
           }
         />
