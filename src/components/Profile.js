@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { callApi } from "../util/api";
 
-const Profile = ({ username, profile, setProfile, setUserid, token }) => {
+const Profile = ({ username, profile, setProfile, setUserId, token }) => {
   const [messages, setMessages] = useState([]);
+  console.log(token);
+  const fetchProfile = async () => {
+    const resp = await callApi({
+      url: "/users/me",
+      token,
+    });
+    console.log(resp);
 
+    setUserId(resp.data._id);
+    setProfile(resp.data);
+    setMessages(resp.data.messages);
+    console.log(resp.data.messages);
+  };
   useEffect(() => {
-    const fetchProfile = async () => {
-      const resp = await callApi({
-        url: "/users/me",
-        token,
-      });
-      const data = await resp.json();
-      setUserid(data.data._id);
-      setProfile(data.data);
-      setMessages(data.data.messages);
-      fetchProfile();
-    };
-  });
-  [];
+    try {
+      token ? fetchProfile() : null;
+    } catch (error) {
+      console.error(error);
+    }
+  }, [token]);
 
   return (
     <>
