@@ -28,7 +28,7 @@ const Messages = ({ posts, token }) => {
       <h1>Send a Message: </h1>
       {posts.map((post) =>
         id === post._id ? (
-          <div className="post" key={post.id}>
+          <div className="post" key={post._id}>
             <h2>{post.title}</h2>
             <h3>{post.price}</h3>
             <h3>{post.description}</h3>
